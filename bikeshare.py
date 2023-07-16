@@ -51,6 +51,30 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
+def load_data(city, month, day):
+    # Load data file into a DataFrame
+    df = pd.read_csv(CITY_DATA[city])
+    
+    # Convert the "Start Time" column to datetime
+    df['Start Time'] = pd.to_datetime(df['Start Time'])
+    
+    # Extract month, day of week, and hour from the "Start Time" column
+    df['Month'] = df['Start Time'].dt.month
+    df['Day of Week'] = df['Start Time'].dt.day_name()
+    df['Hour'] = df['Start Time'].dt.hour
+    
+    # Filter by month if applicable
+    if month != 'all':
+        months = ['january', 'february', 'march', 'april', 'may', 'june']
+        month = months.index(month) + 1
+        df = df[df['Month'] == month]
+    
+    # Filter by day of week if applicable
+    if day != 'all':
+        df = df[df['Day of Week'] == day.title()]
+    
+    return df
+
 def time_stats(df):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
@@ -139,21 +163,7 @@ def main():
     while True:
         city, month, day = get_filters()
 
-        df = pd.read_csv(CITY_DATA[city])
-        
-        df['Start Time'] = pd.to_datetime(df['Start Time'])
-        
-        df['Month'] = df['Start Time'].dt.month
-        df['Day of Week'] = df['Start Time'].dt.day_name()
-        df['Hour'] = df['Start Time'].dt.hour
-        
-        if month != 'all':
-            months = ['january', 'february', 'march', 'april', 'may', 'june']
-            month = months.index(month) + 1
-            df = df[df['Month'] == month]
-        
-        if day != 'all':
-            df = df[df['Day of Week'] == day.title()]
+        df = load_data(city, month, day)
         
         time_stats(df)
         station_stats(df)
