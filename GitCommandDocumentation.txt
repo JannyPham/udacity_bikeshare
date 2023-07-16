@@ -1,0 +1,54 @@
+Profile link: https://github.com/JannyPham
+
+Git Commands:
+
+/*Modify .gitignore  file*/
+
+git commit -m "Update .gitignore to not track .csv files"
+git push origin master
+
+/*Add bikeshare.py file*/
+git add bikeshare.py
+git commit -m “Create bikeshare.py to display the most common start hour”
+git push origin master
+
+/*Update bikeshare.py file to calculate The Most Popular Stations and Trip*/
+git commit -m “Update bikeshare to calculate The Most Popular Stations and Trip”
+git push origin master
+
+/*Update bikeshare.py file to Calculate Trip Duration*/
+git commit -m “Update bikeshare to Calculate Trip Duration”
+git push origin master
+
+/*Update bikeshare.py file to calculate user stats*/
+git commit -m “Update bikeshare to calculate user stats”
+git push origin master
+
+/*Create new branch : refactoring*/
+git branch refactoring
+git push -u origin refactoring
+
+/*Refactor bikeshare.py at load data func*/
+git commit -m “refactor bikeshare.py at load data func”
+git push origin master
+
+/*Merge refactor branch to master branch*/
+git checkout master
+git fetch
+git merge refactoring
+
+/*Create new branch: documentation*/
+git branch documentation
+git push -u origin documentation
+
+/*Add documentation file*/
+git add GitCommandDocumentation.txt
+
+/*Merge documentation branch to master branch*/
+git checkout master
+git fetch
+git merge documentation
+
+
+
+
